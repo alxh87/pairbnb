@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+# User control management
+gem "clearance"
+
+#Security
+gem 'figaro'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
