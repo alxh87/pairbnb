@@ -20,9 +20,10 @@ class ListingsController < ApplicationController
   #   # set_listing
   # end
 
+
 	def create
-	  @listing = current_user.listings.new(listing_params)
-	 	
+	  @listing = current_user.listings.create(listing_params)
+
 	  if @listing.save
 		  redirect_to @listing
 		else
@@ -31,7 +32,9 @@ class ListingsController < ApplicationController
 	end
 
 	# def edit
-	# 	# set_listing
+	# 	set_listing
+	# 	@listing.tag_list = @listing.tag_list.join(", ")
+	# 	byebug
 	# end
 	
   def update	 
@@ -42,7 +45,26 @@ class ListingsController < ApplicationController
 		end
 	end
 
-	private
+
+	def tag_list
+    caller[0][/`([^']*)'/, 1] == 'block in validate' ? @tag_list : tags.map(&:name).join(", ")
+  end
+
+  def tag_list=(names)
+    @tag_list = names.split(",").map do |n|
+      #self.tags.find_or_initialize_by_name(name: n.strip) #uncomment this if you want invalid tags to show in tag list
+      Tag.find_or_initialize_by_name(name: n.strip)
+    end
+  end
+
+  private
+
+    def save_tags
+      self.tags = Tag.transaction do
+        @tag_list.each(&:save)
+      end
+    end
+
 	  def listing_params
 	    params.require(:listing).permit(:title, :description, :tag_list)
 	  end
