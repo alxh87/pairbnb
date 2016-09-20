@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+.main-text
+{
+    position: absolute;
+    top: 200px;
+    width: 96.66666666666666%;
+    color: #FFF;
+}

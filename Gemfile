@@ -1,5 +1,18 @@
 source 'https://rubygems.org'
 
+# User control management
+gem "clearance"
+gem 'byebug'
+
+#Security
+gem 'figaro'
+
+#TAGS
+gem 'acts-as-taggable-on'
+
+#FB
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'

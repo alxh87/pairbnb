@@ -1,0 +1,38 @@
+<h1>Listing listings</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Text</th>
+    <th>UserID</th>
+    <th>Email</th>
+    <th>Tags</th>
+    <th colspan="2"></th>
+  </tr>
+ 
+  <% @listings.each do |listing| %>
+
+    <tr>
+      <td><%= listing.title %></td>
+      <td><%= listing.description %></td>
+      <td><%= listing.user_id %></td>
+      <td><%= listing.user.email %></td>
+      <td><%= raw listing.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></td>
+      <td><%= link_to 'Show', listing_path(listing) %></td>
+      <td><%= link_to 'Edit', edit_listing_path(listing) %></td>
+    </tr>
+
+
+  <% end %>
+</table>
+asfsfs
+
+<div id="tag_cloud">
+  <% tag_cloud Listing.tag_counts, %w[s m l] do |tag, css_class| %>
+    <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+  <% end %>
+</div>
+
+
+
+<%= link_to 'New listing', new_listing_path %>
