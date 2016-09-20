@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"
   delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
   get "/sign_up" => "clearance/users#new", as: "sign_up"
-  get 'welcome/index'
+  get '/welcome/index'
 
   resources :listings
 
@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :edit, :update, :destroy] 
 
+  get 'tags/:tag', to: 'listings#index', as: :tag
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

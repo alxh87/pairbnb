@@ -1,21 +1,28 @@
 class ListingsController < ApplicationController
 	before_action :require_login
+	before_action :set_listing, only: [:show, :edit, :update, :destroy]
+
 
 	def new
 		@listing = Listing.new
 	end
 
   def index
-    @listings = Listing.all
+  	if params[:tag]
+  		@listings=Listing.tagged_with(params[:tag])
+  	else
+	    @listings = Listing.all
+	  end
   end
 
-  def show
-    @listing = Listing.find(params[:id])
-  end
+
+  # def show
+  #   # set_listing
+  # end
 
 	def create
-	  @listing = Listing.new(listing_params)
-	 	@listing.user_id = current_user.id
+	  @listing = current_user.listings.new(listing_params)
+	 	
 	  if @listing.save
 		  redirect_to @listing
 		else
@@ -23,13 +30,11 @@ class ListingsController < ApplicationController
 		end
 	end
 
-	def edit
-		@listing=Listing.find(params[:id])
-	end
+	# def edit
+	# 	# set_listing
+	# end
 	
-  def update
-  	@listing = Listing.find(params[:id])
-	 
+  def update	 
 	  if @listing.update(listing_params)
 		  redirect_to @listing
 		else
@@ -39,7 +44,11 @@ class ListingsController < ApplicationController
 
 	private
 	  def listing_params
-	    params.require(:listing).permit(:title, :description)
+	    params.require(:listing).permit(:title, :description, :tag_list)
 	  end
 
+
+	  def set_listing
+	  	@listing = Listing.find(params[:id]) 
+	  end
 end
