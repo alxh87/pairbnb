@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
 	before_action :require_login
-	before_action :set_listing, only: [:show, :edit, :update, :destroy]
+	before_action :set_listing, only: [:show, :edit, :update, :destroy, :remove_image_at_index]
 
 
 	def new
@@ -38,7 +38,6 @@ class ListingsController < ApplicationController
 	# end
 	
   def update	 
-  	byebug
 	  if @listing.update(listing_params)
 		  redirect_to @listing
 		else
@@ -65,6 +64,18 @@ class ListingsController < ApplicationController
     end
   end
 
+  def remove_image_at_index
+    	byebug
+    remain_images = @listing.avatars # copy the array
+    deleted_image = remain_images.delete_at(params[:image_index].to_i) # delete the target image
+    deleted_image.try(:remove!) # delete image from S3
+    @listing.avatars = remain_images # re-assign back
+    @listing.save
+ 		redirect_to @listing
+  end
+
+
+
   private
 
     def save_tags
@@ -74,8 +85,8 @@ class ListingsController < ApplicationController
     end
 
 	  def listing_params
-	  	params[:listing][:avatars] = []
-	  	params[:listing][:avatars] << params[:listing][:avatars0]
+	  	# params[:listing][:avatars] = []
+	  	params[:listing][:avatars] << params[:listing][:avatars]
 	    params.require(:listing).permit(:title, :description, :tag_list, {avatars:[]})
 	  end
 

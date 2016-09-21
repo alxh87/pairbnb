@@ -24,14 +24,17 @@
     <%= f.text_area :description %>
   </p>
   <p>
-    <%= f.label :tag_list, "Tags (separated by commas)" %><br/>
+    <%= f.label :tag_list, "Tags (separated by spaces)" %><br/>
     <%= f.text_field :tag_list %>
   </p>
   <% if @listing.avatars.present? %>
     <% @listing.avatars.each_with_index do |i, index| %>
       <%= image_tag (i.thumb.url) %>
-      <%= f.file_field "avatars#{index}" %>
+      <a href="<%= remove_image_path(@listing.id, index) %>"<%= button_to 'Delete image'
+       %></a>
     <% end %>
+    Add new photo<br>
+    <%= f.file_field :avatars %>
   <% end %>
   <p>
     <%= f.submit %>

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/welcome/index'
 
   resources :listings
+  get '/listings/:id/edit/remove_index/:image_index' => 'listings#remove_image_at_index', as: 'remove_image'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

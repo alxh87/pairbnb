@@ -8,6 +8,4 @@ class Listing < ActiveRecord::Base
   # acts_as_taggable_on :skills, :interests
   # attr_accessor :tag_list
 
-
-  
 end
