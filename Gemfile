@@ -14,6 +14,11 @@ gem 'acts-as-taggable-on'
 gem 'omniauth'
 gem 'omniauth-facebook'
 
+#IMAGES
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+
+gem 'mini_magick'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use postgresql as the database for Active Record

@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
 	before_action :require_login
-	before_action :set_listing, only: [:show, :edit, :update, :destroy]
+	before_action :set_listing, only: [:show, :edit, :update, :destroy, :remove_image_at_index]
 
 
 	def new
@@ -45,6 +45,13 @@ class ListingsController < ApplicationController
 		end
 	end
 
+	def destroy
+    @listing = Listing.find(params[:id])
+    @listing.destroy
+ 
+    redirect_to listings_path
+  end
+
 
 	def tag_list
     caller[0][/`([^']*)'/, 1] == 'block in validate' ? @tag_list : tags.map(&:name).join(", ")
@@ -57,6 +64,8 @@ class ListingsController < ApplicationController
     end
   end
 
+
+
   private
 
     def save_tags
@@ -66,7 +75,7 @@ class ListingsController < ApplicationController
     end
 
 	  def listing_params
-	    params.require(:listing).permit(:title, :description, :tag_list)
+	    params.require(:listing).permit(:title, :description, :tag_list, {avatars:[]})
 	  end
 
 
