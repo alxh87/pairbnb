@@ -64,16 +64,6 @@ class ListingsController < ApplicationController
     end
   end
 
-  def remove_image_at_index
-    	byebug
-    remain_images = @listing.avatars # copy the array
-    deleted_image = remain_images.delete_at(params[:image_index].to_i) # delete the target image
-    deleted_image.try(:remove!) # delete image from S3
-    @listing.avatars = remain_images # re-assign back
-    @listing.save
- 		redirect_to @listing
-  end
-
 
 
   private
@@ -85,8 +75,6 @@ class ListingsController < ApplicationController
     end
 
 	  def listing_params
-	  	# params[:listing][:avatars] = []
-	  	params[:listing][:avatars] << params[:listing][:avatars]
 	    params.require(:listing).permit(:title, :description, :tag_list, {avatars:[]})
 	  end
 

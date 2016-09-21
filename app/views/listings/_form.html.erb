@@ -30,11 +30,9 @@
   <% if @listing.avatars.present? %>
     <% @listing.avatars.each_with_index do |i, index| %>
       <%= image_tag (i.thumb.url) %>
-      <a href="<%= remove_image_path(@listing.id, index) %>"<%= button_to 'Delete image'
-       %></a>
     <% end %>
-    Add new photo<br>
-    <%= f.file_field :avatars %>
+    Upload photos<br>
+    <%= f.file_field :avatars, multiple: true %>
   <% end %>
   <p>
     <%= f.submit %>
