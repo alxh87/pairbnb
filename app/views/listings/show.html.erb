@@ -9,6 +9,11 @@
   <strong>Description:</strong>
   <%= @listing.description %>
 </p>
+<% if @listing.avatars.present? %>
+	<% @listing.avatars.each do |i| %>
+		<%= image_tag (i.medium.url) %>
+	<% end %>
+<% end %>
 
 <%= link_to 'Edit', edit_listing_path(@listing) %>
 

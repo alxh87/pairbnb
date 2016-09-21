@@ -21,3 +21,29 @@
     width: 96.66666666666666%;
     color: #FFF;
 }
+
+.video_container {
+ position: relative;
+ background:none;
+ width: 100%;
+ -webkit-background-size: cover;
+ -moz-background-size: cover;
+ background-size: cover;
+ text-align: center;
+ color: #fff;
+ /*padding-top: 130px;*/
+ min-height: 500px;
+ letter-spacing: 2px;
+ font-family: "Montserrat", sans-serif;
+}
+.video_container h1 {
+ font-size: 50px;
+ line-height: 1.3;
+}
+.video_container h1 span {
+ font-size: 20px;
+ color: #e8f380 ;
+ border-bottom: 2px solid #e8f380 ;
+ padding-bottom: 12px;
+ line-height: 3;
+}

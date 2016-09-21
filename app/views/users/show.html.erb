@@ -1,0 +1,19 @@
+user show
+
+ 	<% if current_user.avatar.present? %>
+		<%= image_tag (current_user.avatar.large.url) %>
+  <% end %>
+
+<p>
+  <strong>Name:</strong>
+  <%= current_user.name %>
+</p>
+ 
+<p>
+  <strong>email:</strong>
+  <%= current_user.email %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_user_path(current_user) %>

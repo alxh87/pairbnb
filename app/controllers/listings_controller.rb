@@ -38,12 +38,20 @@ class ListingsController < ApplicationController
 	# end
 	
   def update	 
+  	byebug
 	  if @listing.update(listing_params)
 		  redirect_to @listing
 		else
 			render 'edit'
 		end
 	end
+
+	def destroy
+    @listing = Listing.find(params[:id])
+    @listing.destroy
+ 
+    redirect_to listings_path
+  end
 
 
 	def tag_list
@@ -66,7 +74,9 @@ class ListingsController < ApplicationController
     end
 
 	  def listing_params
-	    params.require(:listing).permit(:title, :description, :tag_list)
+	  	params[:listing][:avatars] = []
+	  	params[:listing][:avatars] << params[:listing][:avatars0]
+	    params.require(:listing).permit(:title, :description, :tag_list, {avatars:[]})
 	  end
 
 

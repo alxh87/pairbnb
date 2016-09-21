@@ -13,7 +13,7 @@
       </ul>
     </div>
   <% end %>
- 
+
   <p>
     <%= f.label :title %><br>
     <%= f.text_field :title %>
@@ -27,6 +27,12 @@
     <%= f.label :tag_list, "Tags (separated by commas)" %><br/>
     <%= f.text_field :tag_list %>
   </p>
+  <% if @listing.avatars.present? %>
+    <% @listing.avatars.each_with_index do |i, index| %>
+      <%= image_tag (i.thumb.url) %>
+      <%= f.file_field "avatars#{index}" %>
+    <% end %>
+  <% end %>
   <p>
     <%= f.submit %>
   </p>

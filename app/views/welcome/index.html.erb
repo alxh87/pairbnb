@@ -1,11 +1,22 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<div class="video_container">
 
+          <video autoplay loop="loop" preload="auto" class="video_container">
+             <source src="https://a0.muscache.com/airbnb/static/P1-background-vid-compressed.mp4" type='video/mp4'>
+               <source src="https://a0.muscache.com/airbnb/static/P1-background-vid-compressed.webm" type='video/webm'>
+          </video>
+          <div class="main-text hidden-xs">
+				    <div class="col-md-12 text-center">
+    <h1><span>Rent unique places to stay from local hosts in 190+ countries.</span><br>Welcome <%=current_user.name if current_user != nil%></h1>
+			<div <a class="btn btn-default btn-sm btn-min-block">
+			<%= link_to 'Listings', controller: 'listings' %>
+			</div>
+			<div <a class="btn btn-default btn-sm btn-min-block">
+			<%= link_to 'New listing', new_listing_path %>
+			</div>
+    </div>
+    </div>
+</div>
 
-<h1>Hello, Rails!</h1>
-<%= link_to 'Listings', controller: 'listings' %>
-
-<%= link_to 'New listing', new_listing_path %>
 
 <div class="container">
     <div class="row">
