@@ -16,9 +16,9 @@ class ListingsController < ApplicationController
   end
 
 
-  # def show
-  #   # set_listing
-  # end
+  def show
+   @reservation = Reservation.new
+  end
 
 
 	def create

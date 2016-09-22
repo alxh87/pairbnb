@@ -22,16 +22,16 @@
     color: #FFF;
 }
 
+
 .video_container {
  position: relative;
  background:none;
- width: 100%;
  -webkit-background-size: cover;
  -moz-background-size: cover;
  background-size: cover;
  text-align: center;
  color: #fff;
- /*padding-top: 130px;*/
+ padding-top: 130px;
  min-height: 500px;
  letter-spacing: 2px;
  font-family: "Montserrat", sans-serif;
@@ -46,4 +46,15 @@
  border-bottom: 2px solid #e8f380 ;
  padding-bottom: 12px;
  line-height: 3;
+}
+
+.photo {
+ position: absolute;
+ object-fit: contain;
+ z-index: -5;
+ bottom: 0px;
+display: block;
+    margin: auto;
+ width: 100%;
+
 }

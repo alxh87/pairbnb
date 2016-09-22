@@ -1,10 +1,10 @@
 <div class="video_container">
 
-          <video autoplay loop="loop" preload="auto" class="video_container">
+          <video autoplay loop="loop" preload="auto" class="photo">
              <source src="https://a0.muscache.com/airbnb/static/P1-background-vid-compressed.mp4" type='video/mp4'>
                <source src="https://a0.muscache.com/airbnb/static/P1-background-vid-compressed.webm" type='video/webm'>
           </video>
-          <div class="main-text hidden-xs">
+
 				    <div class="col-md-12 text-center">
     <h1><span>Rent unique places to stay from local hosts in 190+ countries.</span><br>Welcome <%=current_user.name if current_user != nil%></h1>
 			<div <a class="btn btn-default btn-sm btn-min-block">
@@ -13,7 +13,7 @@
 			<div <a class="btn btn-default btn-sm btn-min-block">
 			<%= link_to 'New listing', new_listing_path %>
 			</div>
-    </div>
+
     </div>
 </div>
 
@@ -32,7 +32,7 @@
 				  </ol>
 
 				  <!-- Wrapper for slides -->
-				  <div class="carousel-inner" role="listbox">
+				  <div class="carousel-inner " role="listbox">
 				    <div class="item active">
 				      <img src="http://az619519.vo.msecnd.net/files/SofiaBulgaria_EN-US11941959670_1920x1200.jpg" alt="Office">
 				      <div class="carousel-caption">

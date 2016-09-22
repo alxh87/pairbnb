@@ -1,10 +1,10 @@
 
-
 <p>
   <strong>Title:</strong>
   <%= @listing.title %>
 </p>
  
+<%= @error if @error %>
 <p>
   <strong>Description:</strong>
   <%= @listing.description %>
@@ -14,6 +14,18 @@
 		<%= image_tag (i.medium.url) %>
 	<% end %>
 <% end %>
+
+<%= render 'booking' %>
+
+<% if @listing.reservations.present? %>
+	Booked dates:
+	<% @listing.reservations.each do |i| %>
+		From <%= i.start_date %> to <%= i.end_date %> <br>
+	<% end %>
+<% end %>
+
+<%= Date::current() %>
+
 
 <%= link_to 'Edit', edit_listing_path(@listing) %>
 
