@@ -1,27 +1,40 @@
 class ListingsController < ApplicationController
 	before_action :require_login
-	before_action :set_listing, only: [:show, :edit, :update, :destroy, :remove_image_at_index]
+	before_action :set_listing, only: [:show, :edit, :update, :destroy]
 
 
 	def new
 		@listing = Listing.new
 	end
-
+	
   def index
+  	listings_per_page = 5
+    params[:page] = 1 unless params[:page]
+    first_listing = (params[:page].to_i - 1 ) * listings_per_page
+    
   	if params[:tag]
-  		@listings=Listing.tagged_with(params[:tag])
+  		listings=Listing.tagged_with(params[:tag])
   	else
-	    @listings = Listing.all
+	    listings = Listing.all
 	  end
+
+	  @total_pages = listings.count / listings_per_page
+	  if listings.count % listings_per_page > 0
+      @total_pages += 1
+    end
+    @listings = listings[first_listing...(first_listing + listings_per_page)]
+  
   end
 
 
   def show
-   @reservation = Reservation.new
+  	@blocked_dates=@listing.booked_dates
+   	@reservation = Reservation.new
   end
 
 
 	def create
+		params[:listing][:tag_list]=params[:listing][:tag_list].join(",")
 	  @listing = current_user.listings.create(listing_params)
 
 	  if @listing.save
@@ -37,8 +50,12 @@ class ListingsController < ApplicationController
 	# 	byebug
 	# end
 	
-  def update	 
+  def update	
+
+  	params[:listing][:tag_list]=params[:listing][:tag_list].join(",")
+	   
 	  if @listing.update(listing_params)
+
 		  redirect_to @listing
 		else
 			render 'edit'
@@ -53,29 +70,29 @@ class ListingsController < ApplicationController
   end
 
 
-	def tag_list
-    caller[0][/`([^']*)'/, 1] == 'block in validate' ? @tag_list : tags.map(&:name).join(", ")
-  end
+	# def tag_list
+ #    caller[0][/`([^']*)'/, 1] == 'block in validate' ? @tag_list : tags.map(&:name).join(", ")
+ #  end
 
-  def tag_list=(names)
-    @tag_list = names.split(",").map do |n|
-      #self.tags.find_or_initialize_by_name(name: n.strip) #uncomment this if you want invalid tags to show in tag list
-      Tag.find_or_initialize_by_name(name: n.strip)
-    end
-  end
+ #  def tag_list=(names)
+ #    @tag_list = names.split(",").map do |n|
+ #      #self.tags.find_or_initialize_by_name(name: n.strip) #uncomment this if you want invalid tags to show in tag list
+ #      Tag.find_or_initialize_by_name(name: n.strip)
+ #    end
+ #  end
 
 
 
   private
 
-    def save_tags
-      self.tags = Tag.transaction do
-        @tag_list.each(&:save)
-      end
-    end
+    # def save_tags
+    #   self.tags = Tag.transaction do
+    #     @tag_list.each(&:save)
+    #   end
+    # end
 
 	  def listing_params
-	    params.require(:listing).permit(:title, :description, :tag_list, {avatars:[]})
+	    params.require(:listing).permit(:title, :description, :tag_list, {avatars:[]}, :price_per_night, :price_per_person, :location)
 	  end
 
 

@@ -1,3 +1,3 @@
 
 
-ActsAsTaggableOn.delimiter = ' ' # use space as delimiter
+# ActsAsTaggableOn.delimiter = ',' # use comma as delimiter

@@ -1,0 +1,59 @@
+
+<p>
+  <strong>Title:</strong>
+  <%= @listing.title %>
+</p>
+ 
+<%= @error if @error %>
+<p>
+  <strong>Description:</strong>
+  <%= @listing.description %>
+</p>
+<% if @listing.avatars.present? %>
+	<% @listing.avatars.each do |i| %>
+		<%= image_tag (i.medium.url) %>
+	<% end %>
+<% end %>
+
+Start date: <%= @reservation.start_date %>
+End date: <%= @reservation.end_date %>
+
+<%= link_to 'Back to listing', listing_path(@listing) %>
+
+
+<%= link_to 'Edit', edit_listing_reservation_path(@listing, @reservation) %>
+
+
+<%= link_to 'Listing List', listings_path %>
+
+
+<h3>Your Reservation</h3>
+
+<ul class="list-group">
+  <li class="list-group-item">
+    <p>Listing name: <%= link_to @reservation.listing.title, listing_path(@reservation.listing) %></p>
+    <p>No. of Guest: <%= @reservation.num_people%> </p>
+    <p>Location: <%= @reservation.listing.location %> </p>
+    <p>Check-in Date: <%= @reservation.start_date %></p>
+
+    <p>Checkout Date: <%= @reservation.end_date %></p>
+
+    <strong>Payment Status:</strong>
+    	<% if @reservation.payment %>
+	      <% if @reservation.payment.status == "authorized" %>
+	      <span class="btn btn-success">PAID</span>
+	      
+	      <% else %>
+
+	      <span class="btn btn-danger"> NOT PAID </span>
+
+	       <%= link_to 'Pay Now' , new_payment_path + "?id=" + @reservation.id.to_s, class: "btn btn-warning"  %>
+	      
+	      <% end %>
+	      <% else %>
+	      <span class="btn btn-danger"> NOT PAID </span>
+
+	       <%= link_to 'Pay Now' , new_payment_path + "?id=" + @reservation.id.to_s, class: "btn btn-warning"  %>
+	    <% end %> 
+  </li>
+</ul>

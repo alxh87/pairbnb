@@ -1,0 +1,14 @@
+new res
+
+<h1>Booking Page</h1>
+
+<h2>You are booking <%= @listing.title %></h2>
+
+<%= form_for [@listing, @reservation] do |form| %>
+	<%= render partial: '/reservations/form', object: form %>
+  <p>
+    <%= form.submit 'Confirm Booking' %>
+  </p>
+  <% end %>
+  
+

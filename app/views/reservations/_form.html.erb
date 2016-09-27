@@ -1,0 +1,83 @@
+
+  <% if @reservation.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        Booking error:
+      </h2>
+      <ul>
+        <% @reservation.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        <% @booked_on.each do |x| %>
+          <%= x %>
+          <br>
+          <%end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  Price per night:
+  <div id="listingpricenight"><%= @listing.price_per_night %></div>
+  
+  Additional price per person:
+  <div id="listingpriceperson"><%= @listing.price_per_person %></div>
+
+  <div id="booking" data-dates="<%= @blocked_dates %>">
+  <p class="dateselect">
+    <%= form.label :start %><br>
+    <%= form.text_field :start_date %>
+  </p>
+
+  <p class="dateselect">
+    <%= form.label :end %><br>
+    <%= form.text_field :end_date %>
+  </p>
+
+
+  <p class="dateselect">
+  <%= form.label "Number of people" %><br>
+  <%= form.select :num_people, options_for_select(1..10) %>
+  </p>
+  </div>
+  <h1>
+  <div id="zxc"></div>
+   
+  <div id="totalprice"> 
+    <% if @reservation.total_price %>
+      Total Price is: <%= @reservation.total_price %>
+    <% end %>
+  </div>
+  </h1>
+  
+  <script type="text/javascript">
+  var array = ($("#booking").data('dates'))
+    
+    $("#reservation_start_date").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0, maxDate: "+6M +10D",
+      beforeShowDay: function(date){
+        var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+        return [ array.indexOf(string) == -1 ]}
+    })
+    $("#reservation_end_date").datepicker({ dateFormat: 'yy-mm-dd' , minDate: 0, maxDate: "+6M +10D",
+        beforeShowDay: function(date){
+        var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+        return [ array.indexOf(string) == -1 ]}
+  })
+
+    $("#listingpriceperson").on('click', function(){
+      $("#zxc").html(array);})
+
+    $(".dateselect").on('load, change', function(){
+        start=Date.parse($("#reservation_start_date").val());
+        end=Date.parse($("#reservation_end_date").val());
+        num_days=(end-start)/(1000*60*60*24)
+ 
+        if (num_days<0){
+          $("#totalprice").html("End date should be after start date");
+        } else if (num_days>0){
+          var sum = (($("#reservation_num_people").val()-1)*$("#listingpriceperson").html()*num_days)+($("#listingpricenight").html()*num_days)
+          $("#totalprice").html("Total Price is: "+sum);
+
+        } 
+        
+    })
+  </script>

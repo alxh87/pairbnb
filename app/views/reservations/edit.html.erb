@@ -1,0 +1,7 @@
+<h1>Edit reservation</h1>
+
+
+  <%= link_to 'Destroy', listing_reservation_path(@listing,@reservation),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+<%= link_to 'Back', listings_path %>

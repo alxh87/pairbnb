@@ -15,16 +15,33 @@
 	<% end %>
 <% end %>
 
-<%= render 'booking' %>
+
+<%= form_for [@listing, @reservation], url: confirm_listing_reservation_path(@listing) do |form| %>
+	<%= render partial: '/reservations/form', object: form %>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
 
 <% if @listing.reservations.present? %>
 	Booked dates:
 	<% @listing.reservations.each do |i| %>
-		From <%= i.start_date %> to <%= i.end_date %> <br>
+		<div id="res<%= i.id %>">
+		From <%= i.start_date %> to <%= i.end_date %> 
+		People: <%= i.num_people %>
+		<%= link_to 'Show', listing_reservation_path(@listing, i.id) %>
+		<%= link_to 'Destroy', listing_reservation_path(@listing,i.id),
+		              method: :delete,
+		              data: { confirm: 'Are you sure?' },
+		              remote: true %>
+		<%= link_to 'Back', listings_path %>
+		<br>
+		</div>
 	<% end %>
 <% end %>
 
-<%= Date::current() %>
+
+
 
 
 <%= link_to 'Edit', edit_listing_path(@listing) %>

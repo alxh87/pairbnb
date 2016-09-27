@@ -23,8 +23,31 @@
     <%= f.text_area :description %>
   </p>
   <p>
-    <%= f.label :tag_list, "Tags (separated by spaces)" %><br/>
-    <%= f.text_field :tag_list %>
+    <%= f.label "Price per night" %><br>
+    <%= f.number_field :price_per_night %>
+  </p>
+
+  <p>
+    <%= f.label "Price per person" %><br>
+    <%= f.number_field :price_per_person %>
+  </p>
+  <p>
+    <%= f.label :location %><br>
+    <%= f.text_field :location %>
+  </p>
+  <p>
+  
+  <div>
+    <%= f.label "Wifi" %>
+    <%= f.check_box :tag_list, { :multiple => true }, 'Wifi', nil %>
+    <%= f.label "Kitchen" %>
+    <%= f.check_box :tag_list, { :multiple => true }, 'Kitchen', nil %>
+    <%= f.label "Aircon" %>
+    <%= f.check_box :tag_list, { :multiple => true }, 'Aircon', nil %>
+    <%= f.label "Fireplace" %>
+    <%= f.check_box :tag_list, { :multiple => true }, 'Fireplace', nil %>
+  </div>
+
   </p>
   <% if @listing.avatars.present? %>
     <% @listing.avatars.each_with_index do |i, index| %>
@@ -33,6 +56,7 @@
     Upload photos<br>
     <%= f.file_field :avatars, multiple: true %>
   <% end %>
+
   <p>
     <%= f.submit %>
   </p>
