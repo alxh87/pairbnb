@@ -14,9 +14,13 @@ Rails.application.routes.draw do
 
   resources :listings do
     resources :reservations
+    resources :payments
   end
 
   post 'listings/:listing_id/reservations/confirm', to: 'reservations#new', as: 'confirm_listing_reservation'
+  
+  post 'listings/:listing_id/reservations/payment', to: 'payments#new', as: 'confirm_listing_reservation_payment'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -30,7 +34,7 @@ Rails.application.routes.draw do
 
   get 'tags/:tag', to: 'listings#index', as: :tag
 
-  resources :payments
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

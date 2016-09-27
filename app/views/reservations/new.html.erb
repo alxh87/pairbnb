@@ -4,7 +4,7 @@ new res
 
 <h2>You are booking <%= @listing.title %></h2>
 
-<%= form_for [@listing, @reservation] do |form| %>
+<%= form_for [@listing, @reservation], url: confirm_listing_reservation_payment_path(@listing) do |form| %>
 	<%= render partial: '/reservations/form', object: form %>
   <p>
     <%= form.submit 'Confirm Booking' %>

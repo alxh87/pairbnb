@@ -1,6 +1,6 @@
 <h2>Payment Page</h2>
 
-<%= form_for(@payment) do |f| %>
+<%= form_for [@listing, @reservation, @payment], url: listing_payments_path do |f| %>
 
   <div class="field">
     <h2><%= @reservation.listing.title %></h2>
@@ -27,6 +27,18 @@
 
   <div class="field">
     <%= f.hidden_field :total_price, value: @reservation.total_price %>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :start_date, value: @reservation.start_date %>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :end_date, value: @reservation.end_date %>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :num_people, value: @reservation.num_people %>
   </div>
 
   <div class="field">

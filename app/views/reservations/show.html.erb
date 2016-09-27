@@ -39,15 +39,15 @@ End date: <%= @reservation.end_date %>
     <p>Checkout Date: <%= @reservation.end_date %></p>
 
     <strong>Payment Status:</strong>
-    	<% if @reservation.payment %>
-	      <% if @reservation.payment.status == "authorized" %>
-	      <span class="btn btn-success">PAID</span>
+    	<% if @reservation.payments %>
+	       <% if @reservation.payments.where(status: :authorized).count == 0%>
+      <span class="btn btn-danger"> NOT PAID </span>
+
+       <%= link_to 'Pay Now' , new_payment_path + "?id=" + reservation.id.to_s, class: "btn btn-warning"  %>
 	      
 	      <% else %>
 
-	      <span class="btn btn-danger"> NOT PAID </span>
-
-	       <%= link_to 'Pay Now' , new_payment_path + "?id=" + @reservation.id.to_s, class: "btn btn-warning"  %>
+	      <span class="btn btn-success">PAID</span>
 	      
 	      <% end %>
 	      <% else %>

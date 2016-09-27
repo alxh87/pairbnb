@@ -16,7 +16,7 @@
 <% end %>
 
 
-<%= form_for [@listing, @reservation], url: confirm_listing_reservation_path(@listing) do |form| %>
+<%= form_for [@listing, @reservation], url: confirm_listing_reservation_payment_path(@listing) do |form| %>
 	<%= render partial: '/reservations/form', object: form %>
   <p>
     <%= form.submit %>
