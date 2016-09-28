@@ -51,12 +51,12 @@ ActiveRecord::Schema.define(version: 20160927073228) do
   create_table "reservations", force: :cascade do |t|
     t.integer  "listing_id"
     t.integer  "user_id"
+    t.date     "start_date"
+    t.date     "end_date"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "num_people"
     t.integer  "total_price"
-    t.date     "start_date"
-    t.date     "end_date"
   end
 
   create_table "taggings", force: :cascade do |t|

@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # User control management
 gem "clearance"
-gem 'byebug'
+
 
 #Security
 gem 'figaro'
@@ -16,6 +16,9 @@ gem 'braintree'
 #search
 gem 'searchkick'
 
+#deploy
+gem 'rails_12factor'
+gem 'unicorn'
 
 #TAGS
 gem 'acts-as-taggable-on'
