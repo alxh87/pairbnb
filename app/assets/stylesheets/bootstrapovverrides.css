@@ -1,0 +1,37 @@
+
+
+.navbar-brand {
+    float: left;
+    height: 50px;
+    padding-top: 0px;
+    padding-right: 15px;
+    padding-bottom: 0px;
+    padding-left: 15px;
+    font-size: 18px;
+    line-height: 20px;
+    vertical-align: middle;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 0px 12px;
+    font-size: 14px;
+    background-color: transparent;
+    background-image: none;
+  }
+
+
+
+.navbar-srch {
+    float: left;
+    height: 50px;
+    padding-top: 12px;
+    padding-right: 15px;
+    padding-bottom: 0px;
+    padding-left: 15px;
+    font-size: 18px;
+    line-height: 20px;
+    vertical-align: middle;
+}

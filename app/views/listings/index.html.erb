@@ -23,9 +23,18 @@
     </tr>
 
 
+
   <% end %>
 </table>
-asfsfs
+
+Go to page:  
+  <% (1..@total_pages).each do |page| %>
+    <%= link_to page, controller: 'listings', action: 'index', page: page %>
+  <% end %>
+
+
+
+
 
 <div id="tag_cloud">
   <% tag_cloud Listing.tag_counts, %w[s m l] do |tag, css_class| %>
@@ -36,3 +45,9 @@ asfsfs
 
 
 <%= link_to 'New listing', new_listing_path %>
+<br>
+
+<% @listings.each do |listing| %>
+  <%= render partial: "card", locals: {listing: listing} %>
+  <br>
+<% end %>
