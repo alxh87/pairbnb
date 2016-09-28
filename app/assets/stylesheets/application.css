@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require jquery-ui/datepicker
  */
 
 .main-text
@@ -22,16 +23,16 @@
     color: #FFF;
 }
 
+
 .video_container {
  position: relative;
  background:none;
- width: 100%;
  -webkit-background-size: cover;
  -moz-background-size: cover;
  background-size: cover;
  text-align: center;
  color: #fff;
- /*padding-top: 130px;*/
+ padding-top: 130px;
  min-height: 500px;
  letter-spacing: 2px;
  font-family: "Montserrat", sans-serif;
@@ -47,3 +48,80 @@
  padding-bottom: 12px;
  line-height: 3;
 }
+
+.photo {
+ position: absolute;
+ object-fit: contain;
+ z-index: -5;
+ bottom: 0px;
+display: block;
+    margin: auto;
+ width: 100%;
+}
+
+.text-livethere {
+    font-size: 60px;
+    font-weight: 700;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.text-subhead {
+    margin-bottom: 24px;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.avatar-round{
+	width: 50px;
+	border-radius: 50px;
+}
+
+.cardbg{
+	top: 0;
+	align-content: center;  
+}
+
+.card{
+	width: 300px;
+}
+
+.cardlabel{
+	text-align: left;
+	padding-left: 10px;
+
+}
+
+.cardprice{
+	position: absolute;
+	top:130px;
+	background-color: rgba(45,45,45,0.9);
+	width: 50px;
+}
+
+.cardpricetext{
+
+	padding-left: -20px;
+	padding-right: 50px;
+}
+
+#navav{
+    
+    height: 50px;
+    margin: auto;
+    
+}
+#zcc {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+/*.crop img {
+    width: 400px;
+    height: 300px;
+    margin: -75px 0 0 -100px;
+}*/
