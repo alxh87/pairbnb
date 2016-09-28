@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   end
 
   post 'listings/:listing_id/reservations/confirm', to: 'reservations#new', as: 'confirm_listing_reservation'
-  
   post 'listings/:listing_id/reservations/payment', to: 'payments#new', as: 'confirm_listing_reservation_payment'
   
   # The priority is based upon order of creation: first created -> highest priority.
@@ -26,13 +25,10 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
-
-
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
-
   resources :users, only: [:show, :edit, :update, :destroy] 
-
   get 'tags/:tag', to: 'listings#index', as: :tag
+  post '/search', to: 'listings#search'
 
   
   # Example of regular route:

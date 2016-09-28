@@ -5,6 +5,7 @@ class PaymentsController < ApplicationController
   def new
 
     @listing = Listing.find(params[:listing_id])
+    @blocked_dates=@listing.booked_dates unless @blocked_dates
     @reservation = @listing.reservations.new(res_params)
     @reservation.user=current_user
     @reservation.start_date = Date.parse(params[:reservation][:start_date])
@@ -12,12 +13,15 @@ class PaymentsController < ApplicationController
     @reservation.total_price = find_price_total
 
 
-
-    @client_token = Braintree::ClientToken.generate
-    # @reservation = Reservation.find(params[:id])
-    @payment = Payment.new
-    # @payment = @reservation.payment.new
-    
+    if @reservation.valid?
+      @client_token = Braintree::ClientToken.generate
+      # @reservation = Reservation.find(params[:id])
+      @payment = Payment.new
+      # @payment = @reservation.payment.new
+    else
+      render 'reservations/new'
+      # redirect_to new_listing_reservation_path(:listing=>@listing, :reservation=>@reservation)
+    end
   end
 
   def create
@@ -45,6 +49,7 @@ class PaymentsController < ApplicationController
       if @result.success?
 
         @reservation.save
+        ReservationJob.perform_later(@reservation)
         payment = Payment.create(reservation_id: @reservation.id, braintree_payment_id: @result.transaction.id, status: @result.transaction.status, fourdigit: @result.transaction.credit_card_details.last_4)
 
           redirect_to listing_reservation_path(:listing_id => payment.reservation.listing.id, :id => payment.reservation.id), notice: "Congratulations! Your transaction is successful!"

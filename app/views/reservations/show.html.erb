@@ -43,7 +43,7 @@ End date: <%= @reservation.end_date %>
 	       <% if @reservation.payments.where(status: :authorized).count == 0%>
       <span class="btn btn-danger"> NOT PAID </span>
 
-       <%= link_to 'Pay Now' , new_payment_path + "?id=" + reservation.id.to_s, class: "btn btn-warning"  %>
+       <%= link_to 'Pay Now' , new_listing_payment_path + "?id=" + @reservation.id.to_s, class: "btn btn-warning"  %>
 	      
 	      <% else %>
 

@@ -5,6 +5,7 @@ class Listing < ActiveRecord::Base
 	has_many :reservations
 	mount_uploaders :avatars, ImagesUploader
 	acts_as_taggable
+  searchkick match: :word_start, searchable: [:name, :location, :description]
 	# Alias for acts_as_taggable_on :tags
   # acts_as_taggable_on :skills, :interests
   # attr_accessor :tag_list

@@ -22,6 +22,9 @@
 
   <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
 
+</head>
+
+<body>
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -39,25 +42,30 @@
 
     
     <% if signed_in? %>
-      <!-- Collect the nav links, forms, and other content for toggling -->
+      <!-- Collect the nav links, formss, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <a class="navbar-brand navbar-srch">
           <img src="/img/airbnb-logos/search.png" height="24" width="24">
         </a>
-        <form class="navbar-form navbar-left">
+        <div class="navbar-form navbar-left">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
-          </div>
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form>
-        <ul class="nav navbar-nav navbar-right">
-          
-    <li>
-    <div id="zcc">
-    <%= image_tag(current_user.avatar.thumb.url,  :id => "navav") if current_user.avatar.present? %>
-    </div>
 
-<li>
+
+            <%= form_for Listing.new, url: search_path, class: "navbar-form navbar-left" do |f| %>
+            <%= text_field_tag :term, params[:term], placeholder:"Where do you wanna go?" %>
+            <%= f.submit 'search', class: 'btn btn-primary' %>
+            <% end %>
+
+          </div>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right">  
+          <li>
+            <div id="zcc">
+              <%= image_tag(current_user.avatar.thumb.url,  :id => "navav") if current_user.avatar.present? %>
+            </div>
+
+            <li>
           <%= link_to current_user.name , user_path(current_user) %></li>
           <li><%= link_to 'Sign out', sign_out_path, method: :delete %></li>
         </ul>
@@ -71,12 +79,6 @@
 
   </div><!-- /.container-fluid -->
 </nav>
-
-</head>
-
-<body>
-
-
 
 
   <div id="flash">

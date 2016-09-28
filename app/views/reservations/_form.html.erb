@@ -8,7 +8,7 @@
         <% @reservation.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
-        <% @booked_on.each do |x| %>
+        <% @reservation.unavailable_dates.each do |x| %>
           <%= x %>
           <br>
           <%end %>
@@ -49,7 +49,7 @@
   </div>
   </h1>
   
-  <script type="text/javascript">
+<script type="text/javascript">
   var array = ($("#booking").data('dates'))
     
     $("#reservation_start_date").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0, maxDate: "+6M +10D",
@@ -80,4 +80,4 @@
         } 
         
     })
-  </script>
+</script>

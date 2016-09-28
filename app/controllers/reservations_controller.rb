@@ -2,12 +2,12 @@ class ReservationsController < ApplicationController
 
 	def new
 		@listing = Listing.find(params[:listing_id])
-		@blocked_dates=@listing.booked_dates
+		@blocked_dates=@listing.booked_dates unless @blocked_dates
 		@reservation = @listing.reservations.new(res_params)
 		@reservation.start_date = Date.parse(params[:reservation][:start_date])
 		@reservation.end_date = Date.parse(params[:reservation][:end_date])
 		@reservation.total_price = find_price_total if @reservation.valid?
-		@booked_on=@reservation.unavailable_dates
+		# @booked_on=@reservation.unavailable_dates
 	end
 
 	def create
@@ -21,7 +21,7 @@ class ReservationsController < ApplicationController
 	  	ReservationJob.perform_later(@reservation)
 		  redirect_to [@listing, @reservation]
 		else
-			@booked_on=@reservation.unavailable_dates
+			# @booked_on=@reservation.unavailable_dates
 			render 'new'
 			# redirect_to @listing, :flash => { :error => @reservation.errors.messages }
 		end
@@ -34,7 +34,11 @@ class ReservationsController < ApplicationController
 
 	def show
 		@listing = Listing.find(params[:listing_id])
-		@reservation = @listing.reservations.find(params[:id])
+		if params[:id] == 'confirm' 
+			redirect_to @listing
+		else
+			@reservation = @listing.reservations.find(params[:id])
+		end
 	end
 
 	 def update	 

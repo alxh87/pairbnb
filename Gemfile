@@ -13,6 +13,10 @@ gem 'sidekiq'
 #payment
 gem 'braintree'
 
+#search
+gem 'searchkick'
+
+
 #TAGS
 gem 'acts-as-taggable-on'
 
