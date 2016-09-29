@@ -57,6 +57,6 @@ Rails.application.configure do
   config.action_mailer.default_options = {from: 'alxhdevelopment@gmail.com'}
 #mailer setting ends
 
-  config.action_mailer.default_url_options = { host: 'serene-sands-52716.herokuapp.com }
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
   
 end

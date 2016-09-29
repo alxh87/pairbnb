@@ -95,6 +95,7 @@ Rails.application.configure do
     config.action_mailer.raise_delivery_errors = true
     config.action_mailer.default_options = {from: 'alxhdevelopment@gmail.com'}
   #mailer setting ends
+   config.action_mailer.default_url_options = { host: 'https://serene-sands-52716.herokuapp.com/' }
 
   
 end
