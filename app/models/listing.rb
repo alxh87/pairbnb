@@ -1,6 +1,7 @@
 class Listing < ActiveRecord::Base
 
 	validates :title, presence: true
+  validates :description, presence: true
 	belongs_to :user
 	has_many :reservations
 	mount_uploaders :avatars, ImagesUploader

@@ -37,6 +37,11 @@ ActiveRecord::Schema.define(version: 20160927073228) do
     t.string   "location"
   end
 
+  create_table "listings_users", id: false, force: :cascade do |t|
+    t.integer "user_id",    null: false
+    t.integer "listing_id", null: false
+  end
+
   create_table "payments", force: :cascade do |t|
     t.integer  "reservation_id"
     t.string   "braintree_payment_id"
